@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+enum NegotiationType {
+  DEBIT
+  CREDIT
+}
+
+model Item {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  referenceKey String
+  entry        Entry    @relation(fields: [entryId], references: [id])
+  entryId      Int
+  title        String
+  price        Float    @default(0)
+  discount     Float    @default(0)
+  comments     String?
+}
+
+model Entry {
+  id                   Int             @id @default(autoincrement())
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+  date                 DateTime        @updatedAt
+  negotiationType      NegotiationType
+  totalPrice           Float
+  items                Item[]
+  discount             Float?          @default(0)
+  customerKey          String
+  customerName         String
+  Account              Account         @relation(fields: [accountId], references: [id])
+  accountId            Int
+  previousAccountValue Float
+}
+
+model Account {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  title        String
+  currentValue Float    @default(0)
+  entries      Entry[]
+}

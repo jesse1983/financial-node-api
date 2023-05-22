@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  api:
+    container_name: media-shop-node-api
+    image: media-shop-node-api:latest
+    build: .
+    environment:
+      DATABASE_URL: postgresql://postgres:example@db:5432
+      HOST: http://localhost
+      PORT: 3000
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+  db:
+    container_name: media-shop-node-db
+    image: postgres:alpine3.17
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5432:5432
+
+  db-test:
+    image: postgres:alpine3.17
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5433:5432
+

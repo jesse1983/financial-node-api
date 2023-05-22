@@ -7,7 +7,7 @@ declare global {
       ENV: string;
       PORT: string;
       HOST: string;
-      API_DOCS: string;
+      API_DOCS_URL: string;
     }
   }
 }

@@ -1,10 +1,6 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerui from 'swagger-ui-express';
 
-const getURL = () => {
-  return process.env.HOST + ':' + process.env.PORT;
-};
-
 const specOptions = {
   failOnErrors: true,
   definition: {
@@ -13,7 +9,7 @@ const specOptions = {
       title: 'Financial API Docs',
       version: '1.0.0'
     },
-    servers: [{ url: getURL() }]
+    servers: [{ url: process.env.API_DOCS_URL }]
   },
   apis: ['./src/domains/**/*.ts', './dist/src/domains/**/*.js']
 };

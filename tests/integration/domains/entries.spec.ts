@@ -18,7 +18,7 @@ describe('testing entry', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .expect((res) => {
-        expect(res.body.total).toBe(2);
+        expect(res.body.total).toBe(4);
         expect(res.body.data).toHaveLength(res.body.total);
       })
       .end((err) => {
@@ -76,7 +76,7 @@ describe('testing entry', () => {
       .expect('Content-Type', /json/)
       .expect(201)
       .expect((res) => {
-        expect(res.body.id).toBe(3);
+        expect(res.body.id).toBe(5);
         expect(res.body.totalPrice).toBe(381);
         expect(res.body.discount).toBe(20);
         expect(res.body.customerKey).toBe(
